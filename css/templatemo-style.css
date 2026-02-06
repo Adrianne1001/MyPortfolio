@@ -562,6 +562,15 @@ input { height: 50px; }
   background: transparent;
   color: #eb5424;
 }
+.btn-live {
+  background: #28a745;
+  color: #fff;
+  border: 2px solid #28a745;
+}
+.btn-live:hover {
+  background: transparent;
+  color: #28a745;
+}
 .btn-portfolio .fa {
   margin-right: 5px;
 }
