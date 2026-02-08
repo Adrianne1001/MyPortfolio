@@ -208,3 +208,42 @@ jQuery(document).ready(function($) {
     // Initialize
     initCarousel();
 });
+
+// ========================================= 
+// NMIS RTOC XI REPOSITORY MODAL
+// =========================================
+function openRepoModal() {
+    var modal = document.getElementById('repoModal');
+    modal.style.display = 'flex';
+    // Trigger reflow for animation
+    modal.offsetHeight;
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeRepoModal() {
+    var modal = document.getElementById('repoModal');
+    modal.classList.remove('active');
+    setTimeout(function() {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+    }, 300);
+}
+
+// Close modal on background click
+document.addEventListener('click', function(e) {
+    var modal = document.getElementById('repoModal');
+    if (e.target === modal) {
+        closeRepoModal();
+    }
+});
+
+// Close modal on Escape key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        var modal = document.getElementById('repoModal');
+        if (modal && modal.classList.contains('active')) {
+            closeRepoModal();
+        }
+    }
+});

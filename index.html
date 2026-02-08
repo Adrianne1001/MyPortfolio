@@ -249,13 +249,13 @@ https://templatemo.com/tm-464-ultra-profile
 						<div class="portfolio-slide">
 							<div class="portfolio-card">
 								<div class="portfolio-card-image">
-									<img src="images/portfolio-img7.jpg" alt="QR Code Generator Screenshot">
+									<img src="images/portfolio-img7.jpg" alt="NMIS RTOC XI Screenshot">
 								</div>
-								<h3 class="portfolio-card-title">QR Code Generator</h3>
-								<p class="portfolio-card-tech">JavaScript · CSS · HTML</p>
-								<p class="portfolio-card-desc">Web-based QR code generator with a clean interface. Create custom QR codes instantly with this lightweight, dependency-free JavaScript application.</p>
+								<h3 class="portfolio-card-title">NMIS RTOC XI</h3>
+								<p class="portfolio-card-tech">JavaScript · HTML · CSS · Leaflet.js</p>
+								<p class="portfolio-card-desc">National Meat Inspection Service Regional Technical Operations Center XI - A suite of modules including dashboard, choropleth maps, geolocation, QR codes, and user management.</p>
 								<div class="portfolio-card-buttons">
-									<a href="https://github.com/Adrianne1001/qrCode" target="_blank" class="btn btn-portfolio btn-github">
+									<a href="#" class="btn btn-portfolio btn-github" onclick="openRepoModal(); return false;">
 										<i class="fa fa-github"></i> View Code
 									</a>
 									<a href="https://drive.google.com/file/d/YOUR_VIDEO_ID/view" target="_blank" class="btn btn-portfolio btn-video">
@@ -263,7 +263,7 @@ https://templatemo.com/tm-464-ultra-profile
 									</a>
 								</div>
 								<div class="portfolio-card-buttons">	
-									<a href="https://adrianne1001.github.io/qrCode/" target="_blank" class="btn btn-portfolio btn-live">
+									<a href="https://adrianne1001.github.io/dashboard/" target="_blank" class="btn btn-portfolio btn-live">
 										<i class="fa fa-external-link"></i> Live Demo
 									</a>
 								</div>
@@ -291,7 +291,6 @@ https://templatemo.com/tm-464-ultra-profile
 										<i class="fa fa-external-link"></i> Live Demo
 									</a>
 								</div>
-								<p class="portfolio-card-remark"><i class="fa fa-check-circle"></i> Live demo available</p>
 							</div>
 						</div>
 					</div>
@@ -449,6 +448,70 @@ https://templatemo.com/tm-464-ultra-profile
 		</div>
 	</section>
 	<!-- END CONTACT -->
+
+	<!-- NMIS RTOC XI Repository Modal -->
+	<div id="repoModal" class="repo-modal">
+		<div class="repo-modal-content">
+			<div class="repo-modal-header">
+				<h3><i class="fa fa-github"></i> NMIS RTOC XI Repositories</h3>
+				<button class="repo-modal-close" onclick="closeRepoModal()">&times;</button>
+			</div>
+			<div class="repo-modal-body">
+				<p class="repo-modal-subtitle">Select a module to view its source code:</p>
+				<div class="repo-list">
+					<a href="https://github.com/Adrianne1001/dashboard" target="_blank" class="repo-item">
+						<i class="fa fa-tachometer"></i>
+						<div class="repo-item-info">
+							<span class="repo-item-name">Dashboard</span>
+							<span class="repo-item-desc">Main dashboard interface with analytics</span>
+						</div>
+						<i class="fa fa-external-link repo-item-arrow"></i>
+					</a>
+					<a href="https://github.com/Adrianne1001/ChoroplethMap" target="_blank" class="repo-item">
+						<i class="fa fa-globe"></i>
+						<div class="repo-item-info">
+							<span class="repo-item-name">Choropleth Map</span>
+							<span class="repo-item-desc">Interactive heatmap visualization</span>
+						</div>
+						<i class="fa fa-external-link repo-item-arrow"></i>
+					</a>
+					<a href="https://github.com/Adrianne1001/geolocation" target="_blank" class="repo-item">
+						<i class="fa fa-map-marker"></i>
+						<div class="repo-item-info">
+							<span class="repo-item-name">Geolocation</span>
+							<span class="repo-item-desc">Location tracking and mapping</span>
+						</div>
+						<i class="fa fa-external-link repo-item-arrow"></i>
+					</a>
+					<a href="https://github.com/Adrianne1001/PostArticle" target="_blank" class="repo-item">
+						<i class="fa fa-newspaper-o"></i>
+						<div class="repo-item-info">
+							<span class="repo-item-name">Post Article</span>
+							<span class="repo-item-desc">Article publishing module</span>
+						</div>
+						<i class="fa fa-external-link repo-item-arrow"></i>
+					</a>
+					<a href="https://github.com/Adrianne1001/qrCode" target="_blank" class="repo-item">
+						<i class="fa fa-qrcode"></i>
+						<div class="repo-item-info">
+							<span class="repo-item-name">QR Code Generator</span>
+							<span class="repo-item-desc">QR code generation utility</span>
+						</div>
+						<i class="fa fa-external-link repo-item-arrow"></i>
+					</a>
+					<a href="https://github.com/Adrianne1001/UserManagement-with-Modal" target="_blank" class="repo-item">
+						<i class="fa fa-users"></i>
+						<div class="repo-item-info">
+							<span class="repo-item-name">User Management</span>
+							<span class="repo-item-desc">User accounts and permissions</span>
+						</div>
+						<i class="fa fa-external-link repo-item-arrow"></i>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<script src="js/jquery.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/smoothscroll.js"></script>
