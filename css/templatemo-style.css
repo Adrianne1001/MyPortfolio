@@ -723,6 +723,149 @@ input { height: 50px; }
 /* END MEDIA 360 */
 
 /* ========================================= */
+/* VIDEO PLAYER MODAL STYLES */
+/* ========================================= */
+.video-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 10000;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.video-modal.active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+}
+.video-modal-content {
+  background: #1a1a1a;
+  border-radius: 16px;
+  max-width: 1100px;
+  width: 95%;
+  max-height: 95vh;
+  overflow: hidden;
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1);
+  transform: scale(0.9) translateY(20px);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.video-modal.active .video-modal-content {
+  transform: scale(1) translateY(0);
+}
+.video-modal-header {
+  background: linear-gradient(135deg, #eb5424 0%, #d14718 100%);
+  color: #fff;
+  padding: 18px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.video-modal-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.video-modal-header h3 .fa {
+  font-size: 22px;
+  animation: pulse-play 2s ease-in-out infinite;
+}
+@keyframes pulse-play {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+.video-modal-close {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: #fff;
+  font-size: 24px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+.video-modal-close:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: rotate(90deg);
+}
+.video-modal-body {
+  padding: 0;
+  background: #000;
+}
+.video-container {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 Aspect Ratio */
+  background: #000;
+}
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  z-index: 2;
+  background: #000;
+}
+.video-loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #fff;
+  z-index: 1;
+  transition: opacity 0.3s ease;
+}
+.video-loader.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+.video-loader-spinner {
+  width: 50px;
+  height: 50px;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-top-color: #eb5424;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 15px;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+.video-loader p {
+  font-size: 14px;
+  opacity: 0.7;
+  margin: 0;
+}
+/* Video Modal Responsive */
+@media screen and (max-width: 768px) {
+  .video-modal-content {
+    width: 100%;
+    max-height: 100vh;
+    border-radius: 0;
+  }
+  .video-modal-header {
+    padding: 15px 20px;
+  }
+  .video-modal-header h3 {
+    font-size: 16px;
+  }
+}
+
+/* ========================================= */
 /* REPOSITORY MODAL STYLES */
 /* ========================================= */
 .repo-modal {
