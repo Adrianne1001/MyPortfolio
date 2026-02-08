@@ -210,6 +210,71 @@ jQuery(document).ready(function($) {
 });
 
 // ========================================= 
+// VIDEO PLAYER MODAL
+// =========================================
+function openVideoModal(videoUrl, title) {
+    var modal = document.getElementById('videoModal');
+    var iframe = document.getElementById('videoIframe');
+    var titleSpan = document.querySelector('#videoModalTitle span');
+    
+    // Convert Google Drive view URL to embed URL
+    var embedUrl = videoUrl;
+    var fileIdMatch = videoUrl.match(/\/file\/d\/([^/]+)/);
+    if (fileIdMatch) {
+        embedUrl = 'https://drive.google.com/file/d/' + fileIdMatch[1] + '/preview';
+    }
+    
+    // Set the title and video source
+    if (title) {
+        titleSpan.textContent = title;
+    } else {
+        titleSpan.textContent = 'Watch Demo';
+    }
+    
+    modal.style.display = 'flex';
+    // Trigger reflow for animation
+    modal.offsetHeight;
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    
+    // Load video after modal animation starts
+    setTimeout(function() {
+        iframe.src = embedUrl;
+    }, 100);
+}
+
+function closeVideoModal() {
+    var modal = document.getElementById('videoModal');
+    var iframe = document.getElementById('videoIframe');
+    
+    modal.classList.remove('active');
+    setTimeout(function() {
+        modal.style.display = 'none';
+        iframe.src = ''; // Stop video playback
+        document.body.style.overflow = '';
+    }, 300);
+}
+
+// Close video modal on background click
+document.addEventListener('click', function(e) {
+    var modal = document.getElementById('videoModal');
+    if (e.target === modal) {
+        closeVideoModal();
+    }
+});
+
+// Close video modal on Escape key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        var videoModal = document.getElementById('videoModal');
+        if (videoModal && videoModal.classList.contains('active')) {
+            closeVideoModal();
+            return; // Prioritize video modal
+        }
+    }
+});
+
+// ========================================= 
 // NMIS RTOC XI REPOSITORY MODAL
 // =========================================
 function openRepoModal() {
