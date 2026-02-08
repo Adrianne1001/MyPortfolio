@@ -216,6 +216,7 @@ function openVideoModal(videoUrl, title) {
     var modal = document.getElementById('videoModal');
     var iframe = document.getElementById('videoIframe');
     var titleSpan = document.querySelector('#videoModalTitle span');
+    var loader = document.querySelector('.video-loader');
     
     // Convert Google Drive view URL to embed URL
     var embedUrl = videoUrl;
@@ -231,11 +232,23 @@ function openVideoModal(videoUrl, title) {
         titleSpan.textContent = 'Watch Demo';
     }
     
+    // Show loader
+    if (loader) {
+        loader.classList.remove('hidden');
+    }
+    
     modal.style.display = 'flex';
     // Trigger reflow for animation
     modal.offsetHeight;
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
+    
+    // Hide loader when iframe loads
+    iframe.onload = function() {
+        if (loader) {
+            loader.classList.add('hidden');
+        }
+    };
     
     // Load video after modal animation starts
     setTimeout(function() {
