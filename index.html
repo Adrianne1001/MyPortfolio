@@ -4,10 +4,10 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="keywords" content="">
-	<meta name="description" content="">
+	<meta name="keywords" content="Adrianne John Basuel, Backend Developer, ASP.NET Core, Laravel, Acumatica ERP, MySQL, MSSQL, Business Application Developer, Davao">
+	<meta name="description" content="Adrianne John Basuel — Backend Developer & Business Systems Specialist building robust, scalable web applications and ERP solutions.">
 	<!-- SITE TITLE -->
-	<title>Adrianne John's Portfolio</title>
+	<title>Adrianne John Basuel — Backend Developer & Business Systems Specialist</title>
 
 	<!-- STYLESHEETS -->
 	<link rel="stylesheet" href="css/bootstrap.min.css">
@@ -16,40 +16,45 @@
 	<link rel="stylesheet" href="css/futuristic.css">
 	<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600,700' rel='stylesheet' type='text/css'>
 	<link href='https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap' rel='stylesheet' type='text/css'>
-<!-- 
-
-Ultra Profile
-
-https://templatemo.com/tm-464-ultra-profile
-
--->
 </head>
-<body data-spy="scroll" data-target="#rock-navigation">
+<body>
+
+	<!-- PRELOADER -->
+	<div id="preloader">
+		<div class="preloader-logo">AJB</div>
+		<div class="preloader-bar"></div>
+	</div>
+
+	<!-- SCROLL PROGRESS + CUSTOM CURSOR -->
+	<div id="scroll-progress"></div>
+	<div class="cursor-dot"></div>
+	<div class="cursor-ring"></div>
+
 	<!-- Animated futuristic background -->
 	<canvas id="fx-canvas"></canvas>
+
 	<!-- START NAVIGATION -->
 	<div class="navbar navbar-default bs-dos-nav navbar-fixed-top sticky-navigation" role="navigation">
 		<div class="container">
-
 			<div class="navbar-header">
 				<button class="navbar-toggle" data-toggle="collapse" data-target="#rock-navigation">
 					<span class="icon icon-bar"></span>
 					<span class="icon icon-bar"></span>
 					<span class="icon icon-bar"></span>
 				</button>
-				<a href="#" class="navbar-brand">My Profile</a>
+				<a href="#home" class="navbar-brand smoothScroll">AJB<span>.</span></a>
 			</div>
 			<nav class="collapse navbar-collapse" id="rock-navigation">
 				<ul class="nav navbar-nav navbar-right main-navigation text-uppercase">
 					<li><a href="#home" class="smoothScroll">Home</a></li>
-					<li><a href="#work" class="smoothScroll">My Work</a></li>
-					<li><a href="#portfolio" class="smoothScroll">Portfolio</a></li>
-					<li><a href="#resume" class="smoothScroll">Resume</a></li>
 					<li><a href="#about" class="smoothScroll">About</a></li>
+					<li><a href="#work" class="smoothScroll">Services</a></li>
+					<li><a href="#resume" class="smoothScroll">Skills</a></li>
+					<li><a href="#portfolio" class="smoothScroll">Portfolio</a></li>
 					<li><a href="#contact" class="smoothScroll">Contact</a></li>
+					<li><a href="https://drive.google.com/file/d/1PVTnUBS4cvHLkvKIeNIBmI7GqkykpqTF/view?usp=sharing" target="_blank" class="external nav-resume-btn">Resume</a></li>
 				</ul>
 			</nav>
-
 		</div>
 	</div>
 	<!-- END NAVIGATION -->
@@ -57,29 +62,96 @@ https://templatemo.com/tm-464-ultra-profile
 	<!-- START HOME -->
 	<section id="home" class="templatemo-home">
 		<div class="container">
-			<div class="row">
-				<div class="col-md-2 col-sm-1"></div>
-				<div class="col-md-8 col-sm-10">
-					<h1 class="tm-home-title"><strong>Adrianne John Basuel</strong></h1>
-					<h2 class="tm-home-subtitle">Backend Developer & Business Systems Specialist</h2>
-					<p>I build <strong>robust backend systems</strong> and <strong>scalable web applications</strong> using <strong>ASP.NET Core</strong>, <strong>Laravel</strong>, and <strong>Acumatica ERP</strong>. With deep expertise in <strong>MySQL</strong> and <strong>MSSQL</strong> database management, I transform complex business requirements into efficient, data-driven solutions. Let's build something powerful together.</p>
-					<a href="https://drive.google.com/file/d/1PVTnUBS4cvHLkvKIeNIBmI7GqkykpqTF/view?usp=sharing" class="btn btn-default smoothScroll tm-view-more-btn">View Resume</a>
+			<div class="hero-inner">
+				<span class="hero-badge"><span class="hero-badge-dot"></span> Available for new projects</span>
+				<h1 class="tm-home-title">Adrianne John <strong>Basuel</strong></h1>
+				<h2 class="tm-home-subtitle">I'm a <span class="typed-roles" id="typed" data-roles="Backend Developer|Business Systems Specialist|ERP Developer|Database Architect|Problem Solver">Backend Developer</span><span class="typed-cursor">&nbsp;</span></h2>
+				<p>I build <strong>robust backend systems</strong> and <strong>scalable web applications</strong> with <strong>ASP.NET Core</strong>, <strong>Laravel</strong>, and <strong>Acumatica ERP</strong> — turning complex business requirements into efficient, data-driven solutions.</p>
+				<div class="hero-cta">
+					<a href="#portfolio" class="btn-neo btn-neo-primary smoothScroll">View My Work</a>
+					<a href="#contact" class="btn-neo btn-neo-ghost smoothScroll">Let's Talk</a>
 				</div>
-				<div class="col-md-2 col-sm-1"></div>
+				<div class="hero-resume">
+					<a href="https://drive.google.com/file/d/1PVTnUBS4cvHLkvKIeNIBmI7GqkykpqTF/view?usp=sharing" target="_blank">or view my resume &rarr;</a>
+				</div>
+			</div>
+		</div>
+		<!-- <a href="#about" class="scroll-indicator smoothScroll"><span class="mouse"></span> Scroll</a> -->
+	</section>
+	<!-- END HOME -->
+
+	<!-- START STATS -->
+	<section id="stats" class="tm-stats">
+		<div class="container">
+			<div class="stats-grid">
+				<div class="stat">
+					<div class="stat-num" data-count="8" data-suffix="+">0</div>
+					<div class="stat-label">Featured Projects</div>
+				</div>
+				<div class="stat">
+					<div class="stat-num" data-count="3" data-suffix="+">0</div>
+					<div class="stat-label">Years Building Software</div>
+				</div>
+				<div class="stat">
+					<div class="stat-num" data-count="12" data-suffix="+">0</div>
+					<div class="stat-label">Technologies Mastered</div>
+				</div>
+				<div class="stat">
+					<div class="stat-num" data-count="100" data-suffix="%">0</div>
+					<div class="stat-label">Dedication</div>
+				</div>
+			</div>
+		</div>
+		<!-- TECH MARQUEE -->
+		<div class="tech-marquee">
+			<div class="tech-track">
+				<span>ASP.NET Core</span><span>C#</span><span>Laravel</span><span>PHP</span><span>MySQL</span><span>MSSQL</span><span>Acumatica ERP</span><span>Entity Framework</span><span>JavaScript</span><span>Bootstrap</span><span>Tailwind CSS</span><span>Leaflet.js</span>
+				<span>ASP.NET Core</span><span>C#</span><span>Laravel</span><span>PHP</span><span>MySQL</span><span>MSSQL</span><span>Acumatica ERP</span><span>Entity Framework</span><span>JavaScript</span><span>Bootstrap</span><span>Tailwind CSS</span><span>Leaflet.js</span>
 			</div>
 		</div>
 	</section>
-	<!-- END HOME -->
+	<!-- END STATS -->
+
+	<!-- START ABOUT -->
+	<section id="about" class="tm-about">
+		<div class="container">
+			<div class="row about-row">
+				<div class="col-md-5 col-sm-5 about-photo-col">
+					<div class="about-photo">
+						<img src="images/about-bg1.png" alt="Adrianne John Basuel">
+						<span class="about-photo-frame"></span>
+					</div>
+				</div>
+				<div class="col-md-7 col-sm-7 about-text-col">
+					<span class="section-kicker">Who I Am</span>
+					<h2 class="title">About <strong>Me</strong></h2>
+					<h3 class="about-role">Backend Developer &amp; Business Application Programmer</h3>
+					<p>I'm a <strong>backend-focused developer</strong> who builds the engine behind powerful web applications. As a <strong>Business Application Developer</strong>, I handle enterprise-scale data operations and complex system integrations daily using <strong>Acumatica ERP</strong>.</p>
+					<p>My core strength is <strong>server-side development</strong> with <strong>ASP.NET Core</strong>, <strong>ASP.NET MVC (C#)</strong>, and <strong>PHP Laravel</strong> — designing efficient database architectures and optimized queries across <strong>MySQL</strong> and <strong>MSSQL</strong>, from stored procedures to high-volume data processing.</p>
+					<div class="about-info-grid">
+						<div><span>Name</span> Adrianne John Basuel</div>
+						<div><span>Location</span> Davao City, Philippines</div>
+						<div><span>Email</span> adrianne10160103@gmail.com</div>
+						<div><span>Availability</span> Freelance &amp; Full-time</div>
+					</div>
+					<a href="https://drive.google.com/file/d/1PVTnUBS4cvHLkvKIeNIBmI7GqkykpqTF/view?usp=sharing" target="_blank" class="btn-neo btn-neo-primary">View Resume</a>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- END ABOUT -->
 
 	<!-- START work -->
 	<section id="work" class="tm-padding-top-bottom-100">
 		<div class="container">
+			<div class="section-head section-head-center">
+				<span class="section-kicker">What I Do</span>
+				<h2 class="title">My <strong>Services</strong></h2>
+			</div>
 			<div class="row">
-				<div class="col-md-offset-1 col-md-11">
-					<h2 class="title">My <strong>Work</strong></h2>						
-				</div>
 				<div class="col-md-4 col-sm-4">
 					<div class="work-wrapper">
+						<span class="work-num">01</span>
 						<i class="fa fa-server"></i>
 						<h3 class="text-uppercase tm-work-h3">Backend Web Development</h3>
 						<hr>
@@ -88,6 +160,7 @@ https://templatemo.com/tm-464-ultra-profile
 				</div>
 				<div class="col-md-4 col-sm-4">
 					<div class="work-wrapper">
+						<span class="work-num">02</span>
 						<i class="fa fa-database"></i>
 						<h3 class="text-uppercase tm-work-h3">Database Management</h3>
 						<hr>
@@ -96,8 +169,9 @@ https://templatemo.com/tm-464-ultra-profile
 				</div>
 				<div class="col-md-4 col-sm-4">
 					<div class="work-wrapper">
+						<span class="work-num">03</span>
 						<i class="fa fa-cogs"></i>
-						<h3 class="text-uppercase tm-work-h3">ERP & Business Systems</h3>
+						<h3 class="text-uppercase tm-work-h3">ERP &amp; Business Systems</h3>
 						<hr>
 						<p>As a <strong>Business Application Developer</strong>, I customize <strong>Acumatica ERP</strong> workflows, build custom modules, and integrate enterprise systems. I translate complex business processes into efficient, automated solutions.</p>
 					</div>
@@ -107,22 +181,74 @@ https://templatemo.com/tm-464-ultra-profile
 	</section>
 	<!-- END work -->
 
+	<!-- START RESUME / SKILLS -->
+	<section id="resume" class="tm-padding-top-bottom-100">
+		<div class="container">
+			<div class="section-head section-head-center">
+				<span class="section-kicker">My Toolkit</span>
+				<h2 class="title">Technical <strong>Skills</strong></h2>
+			</div>
+			<div class="row">
+				<div class="col-md-6 col-sm-6">
+					<h4 class="tm-progress-label">ASP.NET Core / MVC (C#) <small class="progress-percent-small">90%</small></h4>
+					<div class="progress tm-progress">
+						<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 90%;"></div>
+					</div>
+					<h4 class="tm-progress-label">PHP / Laravel Framework <small class="progress-percent-small">90%</small></h4>
+					<div class="progress tm-progress">
+						<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 90%;"></div>
+					</div>
+					<h4 class="tm-progress-label">MySQL / MSSQL Database <small class="progress-percent-small">95%</small></h4>
+					<div class="progress tm-progress">
+						<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100" style="width: 95%;"></div>
+					</div>
+					<h4 class="tm-progress-label">Acumatica ERP Development <small class="progress-percent-small">90%</small></h4>
+					<div class="progress tm-progress">
+						<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 90%;"></div>
+					</div>
+					<h4 class="tm-progress-label">Frontend (HTML/CSS/JS) <small class="progress-percent-small">75%</small></h4>
+					<div class="progress tm-progress">
+						<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%;"></div>
+					</div>
+				</div>
+				<div class="col-md-6 col-sm-6">
+					<p>Backend-focused developer with hands-on experience building enterprise applications. I work daily with large datasets and complex business logic, delivering solutions that are reliable, performant, and built to scale.</p>
+					<h4 class="tm-progress-label" style="margin-top:26px;">Tools &amp; Platforms</h4>
+					<div class="skill-chips">
+						<span class="skill-chip">Git &amp; GitHub</span>
+						<span class="skill-chip">Visual Studio</span>
+						<span class="skill-chip">VS Code</span>
+						<span class="skill-chip">Entity Framework</span>
+						<span class="skill-chip">REST APIs</span>
+						<span class="skill-chip">Composer</span>
+						<span class="skill-chip">SSMS</span>
+						<span class="skill-chip">phpMyAdmin</span>
+						<span class="skill-chip">Postman</span>
+						<span class="skill-chip">Tailwind CSS</span>
+						<span class="skill-chip">Bootstrap</span>
+						<span class="skill-chip">Leaflet.js</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- END RESUME / SKILLS -->
+
 	<!-- START PORTFOLIO -->
 	<section id="portfolio" class="tm-portfolio-new">
 		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<h2 class="title text-center">My <strong>Portfolio</strong></h2>
-					<p class="text-center portfolio-subtitle">A selection of projects I've built. Click to view the source code or watch a demo video.</p>
-				</div>
+			<div class="section-head section-head-center">
+				<span class="section-kicker">Selected Work</span>
+				<h2 class="title">My <strong>Portfolio</strong></h2>
+				<p class="portfolio-subtitle">A selection of projects I've built. Click to view the source code or watch a demo video.</p>
 			</div>
-			
+
 			<!-- Portfolio Carousel -->
 			<div class="portfolio-carousel-wrapper">
 				<button class="carousel-btn carousel-btn-prev" aria-label="Previous">
 					<i class="fa fa-chevron-left"></i>
 				</button>
-				
+
 				<div class="portfolio-carousel">
 					<div class="portfolio-carousel-track">
 						<!-- Project 1 -->
@@ -190,7 +316,7 @@ https://templatemo.com/tm-464-ultra-profile
 										<i class="fa fa-play-circle"></i> Watch Demo
 									</a>
 								</div>
-								<div class="portfolio-card-buttons">	
+								<div class="portfolio-card-buttons">
 									<a href="https://adrianne1001.github.io/DigicelPacific/" target="_blank" class="btn btn-portfolio btn-live">
 										<i class="fa fa-external-link"></i> Live Demo
 									</a>
@@ -286,7 +412,7 @@ https://templatemo.com/tm-464-ultra-profile
 										<i class="fa fa-play-circle"></i> Watch Demo
 									</a>
 								</div>
-								<div class="portfolio-card-buttons">	
+								<div class="portfolio-card-buttons">
 									<a href="https://adrianne1001.github.io/dashboard/" target="_blank" class="btn btn-portfolio btn-live">
 										<i class="fa fa-external-link"></i> Live Demo
 									</a>
@@ -310,7 +436,7 @@ https://templatemo.com/tm-464-ultra-profile
 										<i class="fa fa-play-circle"></i> Watch Demo
 									</a>
 								</div>
-								<div class="portfolio-card-buttons">	
+								<div class="portfolio-card-buttons">
 									<a href="https://adrianne1001.github.io/NMIS-LandingPage/" target="_blank" class="btn btn-portfolio btn-live">
 										<i class="fa fa-external-link"></i> Live Demo
 									</a>
@@ -319,159 +445,99 @@ https://templatemo.com/tm-464-ultra-profile
 						</div>
 					</div>
 				</div>
-				
+
 				<button class="carousel-btn carousel-btn-next" aria-label="Next">
 					<i class="fa fa-chevron-right"></i>
 				</button>
 			</div>
-			
+
 			<!-- Carousel Dots -->
 			<div class="carousel-dots"></div>
 		</div>
 	</section>
 	<!-- END PORTFOLIO -->
 
-	<!-- START RESUME -->
-	<section id="resume" class="tm-padding-top-bottom-100">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-6 col-sm-6">					
-					<h2 class="title">My <strong>Profile</strong></h2>
-					<p><span class="tm-info-label">Name</span> Adrianne John Basuel</p>
-					<p><span class="tm-info-label">Birthday</span> June 10, 2001</p>
-					<p><span class="tm-info-label">Address</span> Davao City Philippines</p>
-					<p><span class="tm-info-label">Phone</span> +639765393504</p>
-					<p><span class="tm-info-label">Email</span> adrianne10160103@gmail.com</p>
-					<p><span class="tm-info-label">LinkedIn</span> <a href="https://www.linkedin.com/in/ajbasuel/" class="tm-red-text">https://www.linkedin.com/in/ajbasuel</a></p>
-					<p><span class="tm-info-label">Resume</span> <a href="https://drive.google.com/file/d/1PVTnUBS4cvHLkvKIeNIBmI7GqkykpqTF/view?usp=sharing" class="tm-red-text">Click to view my Resume</a></p>
-				</div>
-				<div class="col-md-6 col-sm-6">
-					<h2 class="title"><strong>Technical</strong> Skills</h2>
-					<p>Backend-focused developer with hands-on experience building enterprise applications. I work daily with large datasets and complex business logic, delivering solutions that are reliable, performant, and built to scale.</p>
-					<h4 class="tm-progress-label">ASP.NET Core / MVC (C#) <small class="progress-percent-small">90%</small></h4>
-					<div class="progress tm-progress">
-						<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 90%;"></div>
-					</div>
-					<h4 class="tm-progress-label">PHP / Laravel Framework <small class="progress-percent-small">90%</small></h4>
-					<div class="progress tm-progress">
-						<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 90%;"></div>
-					</div>
-					<h4 class="tm-progress-label">MySQL / MSSQL Database <small class="progress-percent-small">95%</small></h4>
-					<div class="progress tm-progress">
-						<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100" style="width: 95%;"></div>
-					</div>
-					<h4 class="tm-progress-label">Acumatica ERP Development <small class="progress-percent-small">90%</small></h4>
-					<div class="progress tm-progress">
-						<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 90%;"></div>
-					</div>
-					<h4 class="tm-progress-label">Frontend (HTML/CSS/JS) <small class="progress-percent-small">75%</small></h4>
-					<div class="progress tm-progress">
-						<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%;"></div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- END RESUME -->
-
-	<!-- START ABOUT -->
-	<section id="about" class="tm-about">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-offset-6 col-md-6 col-sm-offset-6 col-sm-7">
-					<div class="title">
-						<h2>This is <strong>me</strong></h2>
-						<h1 class="tm-red-text"><strong>Backend Developer & Business Application Programmer</strong></h1>
-					</div>
-					<p>I'm a <strong>backend-focused developer</strong> who builds the engine behind powerful web applications. Currently working as a <strong>Business Application Developer/Programmer</strong>, I handle enterprise-scale data operations and complex system integrations daily using <strong>Acumatica ERP</strong>.</p>
-					<p>My core strength lies in <strong>server-side development</strong> with <strong>ASP.NET Core</strong>, <strong>ASP.NET MVC (C#)</strong>, and <strong>PHP Laravel</strong>. I design efficient database architectures and write optimized queries for <strong>MySQL</strong> and <strong>MSSQL</strong>—managing everything from complex stored procedures to high-volume data processing.</p>
-					<p>While I'm backend-first, I have solid fundamentals in <strong>HTML, CSS, and JavaScript</strong> to deliver complete solutions when needed. Whether you need a robust API, a custom business system, or ERP customization—I bring production-tested expertise to every project.</p>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- END ABOUT -->
-
-	<!-- START SOCIAL -->
-	<section id="social" class="tm-social">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-4 col-sm-4 wow rotateInUpLeft" data-wow-delay="0.3s">
-					<div class="media facebook">
-						<a href="https://www.facebook.com/Adrianne0610">
-							<div class="media-object pull-left">
-								<i class="fa fa-facebook"></i>
-							</div>
-							<div class="media-body">
-								<h4 class="media-heading tm-social-title">Reach me on Facebook</h4>
-								<h3>Facebook</h3>
-							</div>
-						</a>
-					</div>
-				</div>
-				<div class="col-md-4 col-sm-4 wow rotateInUpLeft" data-wow-delay="0.6s">
-					<div class="media twitter">
-						<a href="https://www.linkedin.com/in/ajbasuel/">
-							<div class="media-object pull-left">
-								<i class="fa fa-linkedin"></i>
-							</div>
-							<div class="media-body">
-								<h4 class="media-heading tm-social-title">Connect with me on</h4>
-								<h3>LinkedIn</h3>
-							</div>
-						</a>
-					</div>
-				</div>
-				<div class="col-md-4 col-sm-4 wow rotateInUpLeft" data-wow-delay="0.9s">
-					<div class="media pinterest">
-						<a href="https://github.com/Adrianne1001">
-							<div class="media-object pull-left">
-								<i class="fa fa-github"></i>
-							</div>
-							<div class="media-body">
-								<h4 class="media-heading tm-social-title">Follow me on</h4>
-								<h3>Github</h3>
-							</div>
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- END SOCIAL -->
-
 	<!-- START CONTACT -->
 	<section id="contact" class="tm-contact">
 		<div class="container">
-			<div class="row">
-				<div class="col-md-12">					
-					<h2 class="title">Drop <strong>me a line</strong></h2>
-					<hr>					
+			<div class="section-head section-head-center">
+				<span class="section-kicker">Get In Touch</span>
+				<h2 class="title">Let's <strong>Work Together</strong></h2>
+			</div>
+			<div class="contact-grid">
+				<div class="contact-info-card">
+					<h3 class="contact-info-title">Contact Information</h3>
+					<p class="contact-info-lead">Have a project in mind or just want to say hi? My inbox is always open.</p>
+					<div class="contact-info-item">
+						<div class="ci-icon"><i class="fa fa-envelope"></i></div>
+						<div>
+							<div class="ci-label">Email</div>
+							<a class="ci-value" href="mailto:adrianne10160103@gmail.com">adrianne10160103@gmail.com</a>
+						</div>
+					</div>
+					<div class="contact-info-item">
+						<div class="ci-icon"><i class="fa fa-phone"></i></div>
+						<div>
+							<div class="ci-label">Phone</div>
+							<a class="ci-value" href="tel:+639765393504">+63 976 539 3504</a>
+						</div>
+					</div>
+					<div class="contact-info-item">
+						<div class="ci-icon"><i class="fa fa-map-marker"></i></div>
+						<div>
+							<div class="ci-label">Location</div>
+							<span class="ci-value">Davao City, Philippines</span>
+						</div>
+					</div>
+					<div class="contact-socials">
+						<a href="https://www.facebook.com/Adrianne0610" target="_blank" aria-label="Facebook"><i class="fa fa-facebook"></i></a>
+						<a href="https://www.linkedin.com/in/ajbasuel/" target="_blank" aria-label="LinkedIn"><i class="fa fa-linkedin"></i></a>
+						<a href="https://github.com/Adrianne1001" target="_blank" aria-label="GitHub"><i class="fa fa-github"></i></a>
+					</div>
 				</div>
-				<div class="col-md-1 col-sm-1"></div>
-				<div class="col-md-10 col-sm-10">
+				<div class="contact-form-card">
 					<form action="#" method="post">
-						<div class="col-md-6 col-sm-6">
-							<input class="form-control" type="text" placeholder="Your Name">
-						</div>
-						<div class="col-md-6 col-sm-6">
-							<input class="form-control" type="email" placeholder="Your Email">
-						</div>
-						<div class="col-md-12 col-sm-12">
-							<input class="form-control" type="text" placeholder="Your Subject">
-							<textarea class="form-control" placeholder="Your Message" rows="6"></textarea>
-						</div>
-						<div class="col-md-offset-2 col-md-8 col-sm-offset-2 col-sm-8">
-							<input class="form-control" type="submit" value="SHOOT MESSAGE">
+						<div class="row">
+							<div class="col-md-6 col-sm-6">
+								<input class="form-control" type="text" placeholder="Your Name">
+							</div>
+							<div class="col-md-6 col-sm-6">
+								<input class="form-control" type="email" placeholder="Your Email">
+							</div>
+							<div class="col-md-12 col-sm-12">
+								<input class="form-control" type="text" placeholder="Your Subject">
+								<textarea class="form-control" placeholder="Your Message" rows="6"></textarea>
+							</div>
+							<div class="col-md-12 col-sm-12">
+								<input class="form-control btn-neo btn-neo-primary" type="submit" value="Send Message">
+							</div>
 						</div>
 					</form>
 				</div>
-				<div class="col-md-1 col-sm-1"></div>
-				
 			</div>
 		</div>
 	</section>
 	<!-- END CONTACT -->
+
+	<!-- START FOOTER -->
+	<footer class="tm-footer">
+		<div class="container">
+			<div class="footer-brand">AJB.</div>
+			<div class="footer-links">
+				<a href="#home" class="smoothScroll">Home</a>
+				<a href="#about" class="smoothScroll">About</a>
+				<a href="#work" class="smoothScroll">Services</a>
+				<a href="#resume" class="smoothScroll">Skills</a>
+				<a href="#portfolio" class="smoothScroll">Portfolio</a>
+				<a href="#contact" class="smoothScroll">Contact</a>
+			</div>
+			<p>&copy; 2026 Adrianne John Basuel · Backend Developer &amp; Business Systems Specialist</p>
+		</div>
+	</footer>
+	<!-- END FOOTER -->
+
+	<!-- BACK TO TOP -->
+	<button id="back-to-top" aria-label="Back to top"><i class="fa fa-arrow-up"></i></button>
 
 	<!-- Video Player Modal -->
 	<div id="videoModal" class="video-modal">
