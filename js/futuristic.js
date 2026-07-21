@@ -150,10 +150,41 @@
     bars.forEach(function (bar) { io.observe(bar); });
   }
 
+  /* ---------- 4. SUBTLE 3D TILT ON CARDS ---------- */
+  function initTilt() {
+    if (reduceMotion) return;
+    // Skip on touch / no-hover devices — tilt needs a pointer.
+    if (window.matchMedia && window.matchMedia('(hover: none)').matches) return;
+
+    var cards = document.querySelectorAll(
+      '.work-wrapper, .portfolio-card, .tm-social .media'
+    );
+    var MAX = 7; // degrees — kept small so it reads as depth, not a gimmick
+
+    cards.forEach(function (card) {
+      card.addEventListener('mousemove', function (e) {
+        var r = card.getBoundingClientRect();
+        var px = (e.clientX - r.left) / r.width;   // 0..1 across
+        var py = (e.clientY - r.top) / r.height;   // 0..1 down
+        var ry = (px - 0.5) * (MAX * 2);
+        var rx = (0.5 - py) * (MAX * 2);
+        card.style.transition = 'transform 0.08s linear';
+        card.style.transform =
+          'perspective(900px) rotateX(' + rx.toFixed(2) + 'deg) rotateY(' +
+          ry.toFixed(2) + 'deg) translateY(-8px)';
+      });
+      card.addEventListener('mouseleave', function () {
+        card.style.transition = 'transform 0.5s cubic-bezier(0.16,1,0.3,1)';
+        card.style.transform = '';
+      });
+    });
+  }
+
   function boot() {
     initParticles();
     initReveal();
     initSkillBars();
+    initTilt();
   }
 
   if (document.readyState === 'loading') {
