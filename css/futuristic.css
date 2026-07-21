@@ -788,6 +788,26 @@ a.ci-value:hover { color: var(--cyan); }
 .contact-form-card textarea.form-control { min-height: 150px; }
 input.btn-neo-primary { height: auto !important; margin-top: 6px; }
 
+/* Contact submit button + status + honeypot */
+.form-submit-btn {
+  width: 100%; border: none; margin-top: 6px; font-family: 'Orbitron', sans-serif;
+}
+.form-submit-btn.is-loading { opacity: 0.85; cursor: wait; }
+.form-submit-btn.is-loading .btn-label::after {
+  content: ""; display: inline-block; width: 14px; height: 14px; margin-left: 10px;
+  vertical-align: -2px; border: 2px solid rgba(6,18,31,0.35); border-top-color: #06121f;
+  border-radius: 50%; animation: spin 0.7s linear infinite;
+}
+.hp-field { display: none !important; }
+.form-status {
+  margin-top: 16px; font-size: 14px; line-height: 1.5; border-radius: 10px;
+  opacity: 0; max-height: 0; padding: 0 18px; overflow: hidden;
+  transition: opacity 0.3s ease, max-height 0.3s ease, padding 0.3s ease;
+}
+.form-status.show { opacity: 1; max-height: 140px; padding: 14px 18px; }
+.form-status.success { background: rgba(52,245,197,0.10); border: 1px solid rgba(52,245,197,0.5); color: #7dffdb; }
+.form-status.error { background: rgba(255,80,120,0.10); border: 1px solid rgba(255,80,120,0.5); color: #ff9bb0; }
+
 /* ---- FOOTER ---- */
 .tm-footer { position: relative; z-index: 1; border-top: 1px solid var(--glass-border); padding: 46px 0; text-align: center; background: rgba(0,0,0,0.35); }
 .tm-footer .footer-brand {

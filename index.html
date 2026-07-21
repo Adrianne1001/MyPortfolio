@@ -496,22 +496,32 @@
 					</div>
 				</div>
 				<div class="contact-form-card">
-					<form action="#" method="post">
+					<form id="contact-form" action="https://api.web3forms.com/submit" method="POST">
+						<!-- Web3Forms config: replace the value below with YOUR access key
+						     from https://web3forms.com (enter adrianne10160103@gmail.com,
+						     the key is emailed to you). Messages then deliver to that inbox. -->
+						<input type="hidden" name="access_key" value="2070bfe4-1a1a-4db4-8e90-d78a4299b74c
+						<input type="hidden" name="from_name" value="AJB Portfolio Contact Form">
+						<!-- Honeypot: hidden from humans, catches bots -->
+						<input type="checkbox" name="botcheck" class="hp-field" tabindex="-1" autocomplete="off">
 						<div class="row">
 							<div class="col-md-6 col-sm-6">
-								<input class="form-control" type="text" placeholder="Your Name">
+								<input class="form-control" type="text" name="name" placeholder="Your Name" required>
 							</div>
 							<div class="col-md-6 col-sm-6">
-								<input class="form-control" type="email" placeholder="Your Email">
+								<input class="form-control" type="email" name="email" placeholder="Your Email" required>
 							</div>
 							<div class="col-md-12 col-sm-12">
-								<input class="form-control" type="text" placeholder="Your Subject">
-								<textarea class="form-control" placeholder="Your Message" rows="6"></textarea>
+								<input class="form-control" type="text" name="subject" placeholder="Your Subject">
+								<textarea class="form-control" name="message" placeholder="Your Message" rows="6" required></textarea>
 							</div>
 							<div class="col-md-12 col-sm-12">
-								<input class="form-control btn-neo btn-neo-primary" type="submit" value="Send Message">
+								<button type="submit" class="btn-neo btn-neo-primary form-submit-btn">
+									<span class="btn-label">Send Message</span>
+								</button>
 							</div>
 						</div>
+						<div id="form-status" class="form-status" role="status" aria-live="polite"></div>
 					</form>
 				</div>
 			</div>

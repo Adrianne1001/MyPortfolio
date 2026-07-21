@@ -336,6 +336,69 @@
     onScroll();
   }
 
+  /* ---------- 11. CONTACT FORM (AJAX -> Web3Forms) ---------- */
+  function initContactForm() {
+    var form = document.getElementById('contact-form');
+    if (!form) return;
+    var status = document.getElementById('form-status');
+    var btn = form.querySelector('.form-submit-btn');
+    var label = btn ? btn.querySelector('.btn-label') : null;
+
+    function showStatus(type, msg) {
+      if (!status) return;
+      status.textContent = msg;
+      status.className = 'form-status show ' + type;
+      if (type === 'success') {
+        setTimeout(function () { status.className = 'form-status'; }, 7000);
+      }
+    }
+    function setLoading(on) {
+      if (!btn) return;
+      btn.disabled = on;
+      btn.classList.toggle('is-loading', on);
+      if (label) label.textContent = on ? 'Sending' : 'Send Message';
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      // Guard: friendly message if the access key hasn't been configured yet.
+      var access = form.querySelector('[name="access_key"]');
+      if (!access || /YOUR_WEB3FORMS_ACCESS_KEY/.test(access.value)) {
+        showStatus('error', 'The form isn’t connected yet — add your Web3Forms access key in index.html. Meanwhile, email me directly at adrianne10160103@gmail.com.');
+        return;
+      }
+
+      // Default subject if the visitor left it blank.
+      var subject = form.querySelector('[name="subject"]');
+      if (subject && !subject.value.trim()) {
+        subject.value = 'New message from your portfolio';
+      }
+
+      setLoading(true);
+      var data = new FormData(form);
+
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: data
+      })
+        .then(function (res) { return res.json().then(function (json) { return { ok: res.ok, json: json }; }); })
+        .then(function (result) {
+          if (result.ok && result.json.success) {
+            showStatus('success', 'Thanks for reaching out! Your message has been sent — I’ll get back to you soon.');
+            form.reset();
+          } else {
+            showStatus('error', (result.json && result.json.message) || 'Something went wrong. Please try again.');
+          }
+        })
+        .catch(function () {
+          showStatus('error', 'Network error. Please try again, or email me directly at adrianne10160103@gmail.com.');
+        })
+        .then(function () { setLoading(false); });
+    });
+  }
+
   function boot() {
     initPreloader();
     initParticles();
@@ -347,6 +410,7 @@
     initCounters();
     initTyping();
     initScrollSpy();
+    initContactForm();
   }
 
   if (document.readyState === 'loading') {
