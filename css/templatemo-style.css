@@ -809,7 +809,8 @@ input { height: 50px; }
   padding-top: 56.25%; /* 16:9 Aspect Ratio */
   background: #000;
 }
-.video-container iframe {
+.video-container iframe,
+.video-container video {
   position: absolute;
   top: 0;
   left: 0;
@@ -818,6 +819,10 @@ input { height: 50px; }
   border: none;
   z-index: 2;
   background: #000;
+}
+#videoPlayer {
+  display: none;
+  object-fit: contain;
 }
 .video-loader {
   position: absolute;

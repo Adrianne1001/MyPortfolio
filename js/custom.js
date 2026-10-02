@@ -221,7 +221,13 @@ function openVideoModal(videoUrl, title) {
     var iframe = document.getElementById('videoIframe');
     var titleSpan = document.querySelector('#videoModalTitle span');
     var loader = document.querySelector('.video-loader');
-    
+    var player = document.getElementById('videoPlayer');
+    var isFile = /\.(mp4|webm)(\?|#|$)/i.test(videoUrl);
+
+    // Self-hosted files play in a <video>; everything else goes in the iframe
+    iframe.style.display = isFile ? 'none' : '';
+    player.style.display = isFile ? 'block' : 'none';
+
     // Convert Google Drive view URL to embed URL
     var embedUrl = videoUrl;
     var fileIdMatch = videoUrl.match(/\/file\/d\/([^/]+)/);
@@ -254,20 +260,36 @@ function openVideoModal(videoUrl, title) {
         }
     };
     
+    player.onloadeddata = function() {
+        if (loader) {
+            loader.classList.add('hidden');
+        }
+    };
+
     // Load video after modal animation starts
     setTimeout(function() {
-        iframe.src = embedUrl;
+        if (isFile) {
+            player.src = videoUrl;
+            var playing = player.play();
+            if (playing && playing.catch) playing.catch(function() {});
+        } else {
+            iframe.src = embedUrl;
+        }
     }, 100);
 }
 
 function closeVideoModal() {
     var modal = document.getElementById('videoModal');
     var iframe = document.getElementById('videoIframe');
-    
+    var player = document.getElementById('videoPlayer');
+
+    player.pause();
     modal.classList.remove('active');
     setTimeout(function() {
         modal.style.display = 'none';
         iframe.src = ''; // Stop video playback
+        player.removeAttribute('src');
+        player.load();
         document.body.style.overflow = '';
     }, 300);
 }
