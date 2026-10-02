@@ -99,12 +99,11 @@
   /* ---------- 2. SCROLL REVEAL ---------- */
   function initReveal() {
     var targets = document.querySelectorAll(
-      '.work-wrapper, .portfolio-card, #resume .col-md-6, ' +
-      '.about-photo, .about-text-col, .stat, .tech-marquee, ' +
-      '.contact-info-card, .contact-form-card, .section-head, ' +
-      '.hero-badge, .tm-home-title, .tm-home-subtitle, ' +
-      '.templatemo-home p, .hero-cta, .hero-resume, ' +
-      '.skill-chips, .portfolio-subtitle'
+      '.hero-badge, .tm-home-title, .tm-home-subtitle, .hero-lead, ' +
+      '.hero-cta, .hero-facts, .hero-socials, .hero-terminal, ' +
+      '.about-photo, .about-text-col, .pillar, .stat, .tech-marquee, ' +
+      '.section-head, .tl-item, .featured, .more-head, .project-card, ' +
+      '.skill-group, .edu-card, .contact-info-card, .contact-form-card'
     );
     targets.forEach(function (el, i) {
       el.classList.add('reveal');
@@ -126,30 +125,33 @@
     targets.forEach(function (el) { io.observe(el); });
   }
 
-  /* ---------- 3. ANIMATED SKILL BARS ---------- */
-  function initSkillBars() {
-    var bars = document.querySelectorAll('.progress-bar-danger');
-    if (!bars.length) return;
+  /* ---------- 3. PROJECT FILTER ---------- */
+  function initProjectFilter() {
+    var buttons = document.querySelectorAll('.pf-btn');
+    var cards = document.querySelectorAll('.project-card');
+    if (!buttons.length || !cards.length) return;
 
-    function fill(bar) {
-      var target = bar.getAttribute('aria-valuenow');
-      // CSS sets width:0 !important as the start state, so we must
-      // override with !important too or the fill won't apply.
-      bar.style.setProperty('width', target + '%', 'important');
-    }
-    if (reduceMotion || !('IntersectionObserver' in window)) {
-      bars.forEach(fill);
-      return;
-    }
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          fill(entry.target);
-          io.unobserve(entry.target);
-        }
+    buttons.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var filter = btn.getAttribute('data-filter');
+        buttons.forEach(function (b) {
+          b.classList.toggle('active', b === btn);
+          b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
+        });
+        cards.forEach(function (card) {
+          var cats = (card.getAttribute('data-cat') || '').split(' ');
+          var show = filter === 'all' || cats.indexOf(filter) !== -1;
+          card.classList.remove('is-entering');
+          card.classList.toggle('is-hidden', !show);
+          if (show) {
+            // Reveal may not have fired for cards that were hidden, so show them now.
+            card.classList.add('in-view');
+            void card.offsetWidth; // restart the entry animation
+            card.classList.add('is-entering');
+          }
+        });
       });
-    }, { threshold: 0.4 });
-    bars.forEach(function (bar) { io.observe(bar); });
+    });
   }
 
   /* ---------- 4. SUBTLE 3D TILT ON CARDS ---------- */
@@ -158,9 +160,7 @@
     // Skip on touch / no-hover devices — tilt needs a pointer.
     if (window.matchMedia && window.matchMedia('(hover: none)').matches) return;
 
-    var cards = document.querySelectorAll(
-      '.work-wrapper, .portfolio-card'
-    );
+    var cards = document.querySelectorAll('.project-card, .pillar');
     var MAX = 7; // degrees — kept small so it reads as depth, not a gimmick
 
     cards.forEach(function (card) {
@@ -233,8 +233,8 @@
     }
     loop();
 
-    var interactive = 'a, button, input, textarea, .portfolio-card, .work-wrapper, ' +
-      '.stat, .skill-chip, .carousel-btn, .carousel-dot, .contact-socials a, .repo-item';
+    var interactive = 'a, button, input, textarea, .project-card, .featured, ' +
+      '.stat, .skill-chip, .terminal, .contact-socials a, .repo-item';
     document.addEventListener('mouseover', function (e) {
       if (e.target.closest && e.target.closest(interactive)) ring.classList.add('grow');
     });
@@ -317,7 +317,7 @@
     function onScroll() {
       var navH = nav ? nav.offsetHeight : 70;
       var pos = window.pageYOffset + navH + 40; // trigger just below the navbar
-      var current = map[0];
+      var current = null; // nothing highlighted while on the hero
       for (var i = 0; i < map.length; i++) {
         if (offsetTop(map[i].sec) <= pos) current = map[i];
       }
@@ -399,11 +399,252 @@
     });
   }
 
+  /* ---------- 12. INTERACTIVE HERO TERMINAL ---------- */
+  function initTerminal() {
+    var body = document.getElementById('terminal-body');
+    var out = document.getElementById('terminal-output');
+    var input = document.getElementById('terminal-input');
+    if (!body || !out || !input) return;
+
+    var RESUME = 'https://drive.google.com/file/d/1x_7AYeGqC6qgW58LmKxmk6UZzatjEWvC/view?usp=sharing';
+    var LINKS = {
+      github: 'https://github.com/Adrianne1001',
+      linkedin: 'https://www.linkedin.com/in/ajbasuel/',
+      resume: RESUME
+    };
+    var SECTIONS = {
+      home: 'home', about: 'about', experience: 'experience', projects: 'portfolio',
+      skills: 'skills', education: 'education', contact: 'contact'
+    };
+    var COMMANDS = ['help', 'whoami', 'ls', 'cd', 'experience', 'projects', 'skills',
+      'education', 'contact', 'resume', 'github', 'linkedin', 'clear', 'sudo hire adrianne'];
+
+    // The JSON intro is in the HTML so it shows without JS; keep a copy to replay.
+    var introJson = out.querySelector('.t-json');
+    var introHTML = introJson ? introJson.innerHTML : '';
+    var history = [], hIndex = 0, introDone = false, introTimer = null;
+
+    function line(html, cls) {
+      var div = document.createElement('div');
+      div.className = 't-line' + (cls ? ' ' + cls : '');
+      div.innerHTML = html;
+      out.appendChild(div);
+      body.scrollTop = body.scrollHeight;
+      return div;
+    }
+    function echo(cmd) {
+      var div = line('<span class="t-prompt">$</span>');
+      div.appendChild(document.createTextNode(cmd));
+    }
+    function jump(name) {
+      return '<button type="button" class="t-link" data-jump="' + name + '">cd ' + name + '</button>';
+    }
+    function scrollToSection(name) {
+      var el = document.getElementById(SECTIONS[name]);
+      if (!el) return false;
+      var nav = document.querySelector('.sticky-navigation');
+      var top = el.getBoundingClientRect().top + window.pageYOffset - (nav ? nav.offsetHeight : 70) + 1;
+      window.scrollTo({ top: top, behavior: reduceMotion ? 'auto' : 'smooth' });
+      return true;
+    }
+    function pad(s, n) { while (s.length < n) s += ' '; return s; }
+
+    var handlers = {
+      help: function () {
+        var rows = [
+          ['whoami', 'quick intro'], ['experience', 'work history'], ['projects', 'featured projects'],
+          ['skills', 'core stack'], ['education', 'degrees and honors'], ['contact', 'how to reach me'],
+          ['resume', 'open my resume'], ['github', 'open my GitHub'], ['linkedin', 'open my LinkedIn'],
+          ['ls', 'list sections'], ['cd [section]', 'jump to a section'], ['clear', 'clear the screen']
+        ];
+        line('<span class="t-accent">Available commands:</span>');
+        rows.forEach(function (r) { line('  ' + pad(r[0], 14) + '<span class="t-dim">' + r[1] + '</span>'); });
+        line('<span class="t-dim">psst: hiring? try</span> <span class="t-ok">sudo hire adrianne</span>');
+      },
+      whoami: function () {
+        line('Adrianne John Basuel, Acumatica ERP &amp; Full-Stack Developer.');
+        line('<span class="t-dim">Davao City, PH · BS CpE Summa Cum Laude · MIS in progress</span>');
+        line('Led 4 developers on Acumatica ERP work for multiple clients.');
+      },
+      experience: function () {
+        line('<span class="t-accent">2025–2026</span>  Business Application Developer <span class="t-dim">@ Infosoft</span>');
+        line('<span class="t-accent">2025</span>       Freelance Software Developer <span class="t-dim">@ CLIQUEHA</span>');
+        line('<span class="t-accent">2024–2025</span>  Jr. Software Developer, Automation QA <span class="t-dim">@ Infosoft</span>');
+        line('<span class="t-accent">2024</span>       IT Intern, Automation QA <span class="t-dim">@ Infosoft</span>');
+        line('<span class="t-dim">details:</span> ' + jump('experience'));
+      },
+      projects: function () {
+        line('<span class="t-ok">★</span> Client Project Tracker  <span class="t-dim">Laravel + Angular, 225 tests</span>');
+        line('<span class="t-ok">★</span> BentaGo                 <span class="t-dim">Flutter, offline-first, Android + Windows</span>');
+        line('<span class="t-ok">★</span> NMIS RTOC XI            <span class="t-dim">Leaflet.js maps, QR, dashboards</span>');
+        line('<span class="t-dim">+ 11 more:</span> ' + jump('projects'));
+      },
+      skills: function () {
+        line('<span class="j-key">erp</span>       Acumatica Cloud ERP, Report Designer, REST/OData');
+        line('<span class="j-key">backend</span>   C#, ASP.NET Core/MVC, PHP Laravel');
+        line('<span class="j-key">data</span>      MSSQL, MySQL, SQLite');
+        line('<span class="j-key">frontend</span>  Angular, TypeScript, Flutter, React Native');
+        line('<span class="t-dim">full list:</span> ' + jump('skills'));
+      },
+      education: function () {
+        line('MIS, University of the Immaculate Conception <span class="t-dim">(in progress, GWA 1.2)</span>');
+        line('BS Computer Engineering, University of Mindanao <span class="t-ok">Summa Cum Laude</span>');
+        line('<span class="t-dim">certs and honors:</span> ' + jump('education'));
+      },
+      contact: function () {
+        line('email     <a class="t-link" href="mailto:adrianne10160103@gmail.com">adrianne10160103@gmail.com</a>');
+        line('phone     +63 976 539 3504');
+        line('linkedin  <a class="t-link" href="' + LINKS.linkedin + '" target="_blank" rel="noopener">linkedin.com/in/ajbasuel</a>');
+        line('<span class="t-dim">or use the form:</span> ' + jump('contact'));
+      },
+      ls: function () {
+        line(Object.keys(SECTIONS).map(function (s) { return '<span class="t-accent">' + s + '/</span>'; }).join('  '));
+      },
+      clear: function () { out.innerHTML = ''; }
+    };
+    ['resume', 'github', 'linkedin'].forEach(function (k) {
+      handlers[k] = function () {
+        line('<span class="t-ok">opening</span> ' + k + ' in a new tab...');
+        window.open(LINKS[k], '_blank', 'noopener');
+      };
+    });
+
+    function hire() {
+      line('<span class="t-dim">[sudo] password for recruiter: ********</span>');
+      setTimeout(function () {
+        line('<span class="t-ok">✔ Access granted.</span> Great choice!');
+        line('Taking you to the contact form...');
+        setTimeout(function () {
+          scrollToSection('contact');
+          var name = document.querySelector('#contact-form [name="name"]');
+          if (name) setTimeout(function () { name.focus({ preventScroll: true }); }, reduceMotion ? 0 : 700);
+        }, 500);
+      }, reduceMotion ? 0 : 450);
+    }
+
+    function run(raw) {
+      finishIntro();
+      var cmd = raw.trim();
+      echo(cmd);
+      if (!cmd) return;
+      history.push(cmd); hIndex = history.length;
+      var lower = cmd.toLowerCase().replace(/\s+/g, ' ');
+      var parts = lower.split(' ');
+
+      if (lower === 'sudo hire adrianne' || lower === 'hire adrianne' || lower === 'hire') return hire();
+      if (parts[0] === 'sudo') return line('<span class="t-err">Nice try.</span> The only sudo allowed here is <span class="t-ok">sudo hire adrianne</span>');
+      if (parts[0] === 'cd') {
+        var target = (parts[1] || '').replace(/\/$/, '');
+        if (target === '~' || target === '') target = 'home';
+        if (scrollToSection(target)) return line('<span class="t-dim">→ /' + target + '</span>');
+        return line('<span class="t-err">cd: no such section:</span> ' + escapeHtml(parts[1]) + ' <span class="t-dim">(try ls)</span>');
+      }
+      if (parts[0] === 'rm') return line('<span class="t-err">Permission denied.</span> This portfolio is in production.');
+      if (handlers[parts[0]]) return handlers[parts[0]]();
+      line('<span class="t-err">command not found:</span> ' + escapeHtml(parts[0]) + '. Type <span class="t-ok">help</span> to see what I can do.');
+    }
+
+    function escapeHtml(s) {
+      return String(s).replace(/[&<>"']/g, function (c) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+      });
+    }
+
+    function finishIntro() {
+      if (introDone) return;
+      introDone = true;
+      clearTimeout(introTimer);
+      out.innerHTML = '';
+      line('<span class="t-prompt">$</span>curl -s localhost:8080/api/v1/developer');
+      var pre = document.createElement('pre');
+      pre.className = 't-json';
+      pre.innerHTML = introHTML;
+      out.appendChild(pre);
+      line('<span class="t-dim">Type</span> <span class="t-ok">help</span> <span class="t-dim">to explore, or tap a command below.</span>');
+    }
+
+    // Typed intro: the command types out, then the JSON response streams in.
+    function playIntro() {
+      if (reduceMotion || !introHTML) return finishIntro();
+      out.innerHTML = '';
+      var cmdLine = line('<span class="t-prompt">$</span>');
+      var text = 'curl -s localhost:8080/api/v1/developer';
+      var i = 0;
+      function typeCmd() {
+        if (introDone) return;
+        cmdLine.appendChild(document.createTextNode(text.charAt(i++)));
+        if (i < text.length) introTimer = setTimeout(typeCmd, 38 + Math.random() * 40);
+        else introTimer = setTimeout(streamJson, 380);
+      }
+      function streamJson() {
+        if (introDone) return;
+        var pre = document.createElement('pre');
+        pre.className = 't-json';
+        out.appendChild(pre);
+        var rows = introHTML.split('\n'), r = 0;
+        (function next() {
+          if (introDone) return;
+          pre.innerHTML += (r ? '\n' : '') + rows[r++];
+          body.scrollTop = body.scrollHeight;
+          if (r < rows.length) introTimer = setTimeout(next, 90);
+          else introTimer = setTimeout(function () {
+            if (introDone) return;
+            introDone = true;
+            line('<span class="t-dim">Type</span> <span class="t-ok">help</span> <span class="t-dim">to explore, or tap a command below.</span>');
+          }, 250);
+        })();
+      }
+      // Start once the preloader is gone so the visitor actually sees it.
+      introTimer = setTimeout(typeCmd, 1100);
+    }
+
+    input.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        var v = input.value; input.value = '';
+        run(v);
+      } else if (e.key === 'ArrowUp') {
+        if (!history.length) return;
+        e.preventDefault();
+        hIndex = Math.max(0, hIndex - 1);
+        input.value = history[hIndex];
+      } else if (e.key === 'ArrowDown') {
+        if (!history.length) return;
+        e.preventDefault();
+        hIndex = Math.min(history.length, hIndex + 1);
+        input.value = history[hIndex] || '';
+      } else if (e.key === 'Tab') {
+        var v2 = input.value.toLowerCase();
+        if (!v2) return;
+        var match = COMMANDS.filter(function (c) { return c.indexOf(v2) === 0; });
+        if (match.length) { e.preventDefault(); input.value = match[0]; }
+      } else if (e.key === 'l' && e.ctrlKey) {
+        e.preventDefault(); out.innerHTML = '';
+      }
+    });
+
+    // Click anywhere in the terminal to type (but let links/buttons work).
+    body.addEventListener('click', function (e) {
+      var j = e.target.closest && e.target.closest('[data-jump]');
+      if (j) { scrollToSection(j.getAttribute('data-jump')); return; }
+      if (e.target.closest && e.target.closest('a, button')) return;
+      if (window.getSelection && String(window.getSelection())) return; // allow copying text
+      input.focus({ preventScroll: true });
+    });
+
+    document.querySelectorAll('.terminal-hints [data-cmd]').forEach(function (btn) {
+      btn.addEventListener('click', function () { run(btn.getAttribute('data-cmd')); });
+    });
+
+    playIntro();
+  }
+
   function boot() {
     initPreloader();
     initParticles();
     initReveal();
-    initSkillBars();
+    initProjectFilter();
+    initTerminal();
     initTilt();
     initScrollUI();
     initCursor();
